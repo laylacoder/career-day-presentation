@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Career Day Handout — Data & Software Engineering</title>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     /* ── Reset & base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -331,10 +331,13 @@
       text-align: center;
     }
 
-    #qrcode canvas, #qrcode img {
+    #qrcode-handout canvas, #qrcode-handout img,
+    #qrcode-linkedin canvas, #qrcode-linkedin img {
       border-radius: 6px;
-      border: 2px solid #7c3aed;
     }
+
+    #qrcode-handout canvas, #qrcode-handout img { border: 2px solid #7c3aed; }
+    #qrcode-linkedin canvas, #qrcode-linkedin img { border: 2px solid #06b6d4; }
 
     .tip-box {
       flex: 1;
@@ -597,11 +600,15 @@
     </div>
   </div>
 
-  <!-- Bottom row: QR + tip -->
+  <!-- Bottom row: QR codes + tip -->
   <div class="bottom-row">
     <div class="qr-block">
-      <div id="qrcode"></div>
-      <p>Scan to view<br>the full presentation</p>
+      <div id="qrcode-handout"></div>
+      <p>Scan for<br>this handout</p>
+    </div>
+    <div class="qr-block">
+      <div id="qrcode-linkedin"></div>
+      <p>Connect on<br>LinkedIn</p>
     </div>
     <div class="tip-box">
       <h4>Remember This</h4>
@@ -620,20 +627,22 @@
 </div>
 
 <script>
-  // ── Update this URL to the hosted link for your presentation ──
-  const PRESENTATION_URL = "YOUR-LINK-HERE";
+  new QRCode(document.getElementById("qrcode-handout"), {
+    text: "https://laylacoder.github.io/career-day-presentation/handout.html",
+    width: 100,
+    height: 100,
+    colorDark: "#7c3aed",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
 
-  QRCode.toCanvas(document.createElement('canvas'), PRESENTATION_URL, {
-    width: 90,
-    margin: 1,
-    color: { dark: '#7c3aed', light: '#ffffff' }
-  }, function (err, canvas) {
-    if (!err) {
-      document.getElementById('qrcode').appendChild(canvas);
-    } else {
-      document.getElementById('qrcode').innerHTML =
-        '<div style="width:90px;height:90px;border:2px solid #7c3aed;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#7c3aed;text-align:center;padding:6px;">Update URL in script</div>';
-    }
+  new QRCode(document.getElementById("qrcode-linkedin"), {
+    text: "https://www.linkedin.com/in/khaaliah-barr-blake-83160030/",
+    width: 100,
+    height: 100,
+    colorDark: "#06b6d4",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
   });
 </script>
 
