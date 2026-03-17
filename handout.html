@@ -650,11 +650,15 @@
     </div>
   </div>
 
-  <!-- Bottom row: QR + tip -->
+  <!-- Bottom row: QR codes + tip -->
   <div class="bottom-row">
     <div class="qr-block">
-      <div id="qrcode"></div>
-      <p>Scan to view<br>the presentation</p>
+      <div id="qrcode-handout"></div>
+      <p>Scan for<br>this handout</p>
+    </div>
+    <div class="qr-block">
+      <div id="qrcode-linkedin"></div>
+      <p>Connect on<br>LinkedIn</p>
     </div>
     <div class="tip-box">
       <h4>Remember This</h4>
@@ -673,14 +677,20 @@
 </div>
 
 <script>
-  // Update this to your hosted presentation URL when ready; currently links to LinkedIn
-  const PRESENTATION_URL = "https://laylacoder.github.io/career-day-presentation/presentation.html";
-
-  new QRCode(document.getElementById("qrcode"), {
-    text: PRESENTATION_URL,
+  new QRCode(document.getElementById("qrcode-handout"), {
+    text: "https://laylacoder.github.io/career-day-presentation/handout.html",
     width: 100,
     height: 100,
     colorDark: "#7c3aed",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+  new QRCode(document.getElementById("qrcode-linkedin"), {
+    text: "https://www.linkedin.com/in/khaaliah-barr-blake-83160030/",
+    width: 100,
+    height: 100,
+    colorDark: "#06b6d4",
     colorLight: "#ffffff",
     correctLevel: QRCode.CorrectLevel.H
   });
