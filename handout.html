@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Career Day Handout — Data & Software Engineering</title>
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <style>
     /* ── Reset & base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -369,68 +369,15 @@
       color: #aaa;
     }
 
-    /* ── Print toolbar (screen only) ── */
-    .print-bar {
-      position: fixed;
-      top: 16px;
-      right: 20px;
-      z-index: 999;
-      display: flex;
-      gap: 8px;
-    }
-
-    .print-bar button {
-      background: #7c3aed;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 8px 18px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(124,58,237,0.35);
-      transition: background 0.15s;
-    }
-
-    .print-bar button:hover { background: #6d28d9; }
-
-    /* ── Print styles ── */
+    /* ── Print ── */
     @media print {
-      .print-bar { display: none !important; }
-
-      html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
-
-      .page {
-        width: 100% !important;
-        min-height: 0 !important;
-        margin: 0 !important;
-        padding: 0.5in 0.6in !important;
-        page-break-after: always;
-        break-after: page;
-      }
-
-      .page:last-of-type { page-break-after: avoid; break-after: avoid; }
-
-      .page + .page { border-top: none !important; margin-top: 0 !important; }
-
-      /* Preserve colors for color printers */
-      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-
-      /* Prevent orphaned elements */
-      .field-card, .path-step, .vocab-item, .resource-card, .bottom-row {
-        page-break-inside: avoid;
-        break-inside: avoid;
-      }
+      body { background: #fff; }
+      .page { margin: 0; padding: 0.5in 0.6in; width: 100%; }
+      .page + .page { border-top: none; page-break-before: always; margin-top: 0; }
     }
-
-    @page { size: letter portrait; margin: 0; }
   </style>
 </head>
 <body>
-
-<div class="print-bar">
-  <button onclick="window.print()">Print / Save as PDF</button>
-</div>
 
 <!-- ══════════════════ PAGE 1 ══════════════════ -->
 <div class="page">
@@ -438,9 +385,9 @@
   <div class="page-header">
     <div class="header-text">
       <h1>Data &amp; Software Engineering</h1>
-      <p>A career guide for future builders &mdash; brought to you by Murmuration</p>
+      <p>A career guide for future builders &mdash;</p>
     </div>
-    <div class="header-badge">Career Day 2026</div>
+    <div class="header-badge">Memorial junior High School Annual Career Day 2026</div>
   </div>
 
   <!-- Fields -->
@@ -489,7 +436,7 @@
     </div>
     <div class="salary-item">
       <div class="label">Data Engineer &mdash; Senior</div>
-      <div class="amount">$140–180K</div>
+      <div class="amount">$140–200K</div>
       <div class="sublabel">per year</div>
     </div>
     <div class="salary-item se-bg">
@@ -569,7 +516,7 @@
 
   </div>
 
-  <div class="page-footer">Page 1 of 2 &mdash; Career Day 2026 &mdash; Murmuration Data Engineering &mdash; linkedin.com/in/khaaliah-barr-blake-83160030</div>
+  <div class="page-footer">Page 1 of 2 &mdash; Career Day 2026 &mdash; Data Engineering</div>
 </div>
 
 
@@ -581,7 +528,7 @@
       <h1>Key Vocab &amp; Free Resources</h1>
       <p>The words you&rsquo;ll hear &mdash; and where to start learning today</p>
     </div>
-    <div class="header-badge">Career Day 2026</div>
+    <div class="header-badge">Memorial Junior High School Annual Career Day 2026</div>
   </div>
 
   <!-- Vocab -->
@@ -650,15 +597,11 @@
     </div>
   </div>
 
-  <!-- Bottom row: QR codes + tip -->
+  <!-- Bottom row: QR + tip -->
   <div class="bottom-row">
     <div class="qr-block">
-      <div id="qrcode-handout"></div>
-      <p>Scan for<br>this handout</p>
-    </div>
-    <div class="qr-block">
-      <div id="qrcode-linkedin"></div>
-      <p>Connect on<br>LinkedIn</p>
+      <div id="qrcode"></div>
+      <p>Scan to view<br>the full presentation</p>
     </div>
     <div class="tip-box">
       <h4>Remember This</h4>
@@ -672,27 +615,25 @@
     </div>
   </div>
 
-  <div class="page-footer">Page 2 of 2 &mdash; Career Day 2026 &mdash; Murmuration Data Engineering &mdash; Connect: linkedin.com/in/khaaliah-barr-blake-83160030</div>
+  <div class="page-footer">Page 2 of 2 &mdash; Memorial Junior High School Annual Career Day 2026 &mdash; Data Engineering &mdash; Questions? Ask me or connect on LinkedIn.</div>
 
 </div>
 
 <script>
-  new QRCode(document.getElementById("qrcode-handout"), {
-    text: "https://laylacoder.github.io/career-day-presentation/handout.html",
-    width: 100,
-    height: 100,
-    colorDark: "#7c3aed",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.H
-  });
+  // ── Update this URL to the hosted link for your presentation ──
+  const PRESENTATION_URL = "YOUR-LINK-HERE";
 
-  new QRCode(document.getElementById("qrcode-linkedin"), {
-    text: "https://www.linkedin.com/in/khaaliah-barr-blake-83160030/",
-    width: 100,
-    height: 100,
-    colorDark: "#06b6d4",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.H
+  QRCode.toCanvas(document.createElement('canvas'), PRESENTATION_URL, {
+    width: 90,
+    margin: 1,
+    color: { dark: '#7c3aed', light: '#ffffff' }
+  }, function (err, canvas) {
+    if (!err) {
+      document.getElementById('qrcode').appendChild(canvas);
+    } else {
+      document.getElementById('qrcode').innerHTML =
+        '<div style="width:90px;height:90px;border:2px solid #7c3aed;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#7c3aed;text-align:center;padding:6px;">Update URL in script</div>';
+    }
   });
 </script>
 
